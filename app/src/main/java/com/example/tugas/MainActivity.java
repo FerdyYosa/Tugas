@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog dialog;
     LayoutInflater inflater;
     View dialogView;
-//    RadioButton lakiLaki, perempuan, Islam, kristen, konghuchu, katolik, hindu, buddha, aliran;
+    RadioGroup radioGroupJK, radioGroupAgama;
+    RadioButton radioButtonJK, radioButtonAgama;
     TextInputEditText namaDepan, tglLahir, namaBelakang, tempatLahir, alamat, telephone, email, password, repassword;
 
     AwesomeValidation awesomeValidation;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        radioGroupAgama = (RadioGroup) findViewById(R.id.Buttonagama);
+        radioGroupJK = (RadioGroup) findViewById(R.id.jenisKelaminRB);
         tglLahir = (TextInputEditText) findViewById(R.id.tglLahir);
         namaDepan = (TextInputEditText) findViewById(R.id.namaDepan);
         namaBelakang = (TextInputEditText) findViewById(R.id.namaBelakang);
@@ -90,31 +94,12 @@ public class MainActivity extends AppCompatActivity {
                     ".{8,}", R.string.invalid_password);
         }
 
-        myCalendar = Calendar.getInstance();
-        date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-        };
-
-        tglLahir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new DatePickerDialog(MainActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH)
-                        , myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
         bttnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 awesomeValidation.validate();
                 if (awesomeValidation.validate() == true){
-                    DialogForm();
+                    alertDIalog();
                 }
                 else {
 
@@ -132,12 +117,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        tglLahir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(MainActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH)
+                        , myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        myCalendar = Calendar.getInstance();
+        date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+
     }
     private void updateLabel () {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         tglLahir.setText(sdf.format(myCalendar.getTime()));
     }
+
+    private void alertDIalog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Konfirmasi...");
+        builder.setMessage("Apakah data yang anda masukkan sudah benar?");
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setCancelable(true);
+        builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DialogForm();
+            }
+        });
+        builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     private void DialogForm() {
 
         dialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -156,6 +183,10 @@ public class MainActivity extends AppCompatActivity {
         TextView Agama = dialogView.findViewById(R.id.Agama);
         TextView noTelepon = dialogView.findViewById(R.id.telephone2);
         TextView txtEmail = dialogView.findViewById(R.id.email2);
+        int selectedIdJK = radioGroupJK.getCheckedRadioButtonId();
+        radioButtonJK = (RadioButton) findViewById(selectedIdJK);
+        int selectedIdAgama = radioGroupAgama.getCheckedRadioButtonId();
+        radioButtonAgama = (RadioButton) findViewById(selectedIdAgama);
 
         Button bttnKeluar = dialogView.findViewById(R.id.bttnKeluar);
         Button bttnLanjut = dialogView.findViewById(R.id.bttnLanjut);
@@ -164,8 +195,8 @@ public class MainActivity extends AppCompatActivity {
         namaBelakang2.setText(namaBelakang.getText());
         tTl.setText(tempatLahir.getText() + ", " + tglLahir.getText());
         Alamat.setText(alamat.getText());
-//        jenisKelamin2.setText(jenisKelaminRB.toString());
-//        Agama.setText();
+        jenisKelamin2.setText(radioButtonJK.getText().toString());
+        Agama.setText(radioButtonAgama.getText().toString());
         noTelepon.setText(telephone.getText());
         txtEmail.setText(email.getText());
         dialog.setView(dialogView);
