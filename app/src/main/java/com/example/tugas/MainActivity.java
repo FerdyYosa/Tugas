@@ -97,9 +97,21 @@ public class MainActivity extends AppCompatActivity {
         bttnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int selectedIdJK = radioGroupJK.getCheckedRadioButtonId();
+                radioButtonJK = (RadioButton) findViewById(selectedIdJK);
+                int selectedIdAgama = radioGroupAgama.getCheckedRadioButtonId();
+                radioButtonAgama = (RadioButton) findViewById(selectedIdAgama);
                 awesomeValidation.validate();
                 if (awesomeValidation.validate() == true){
-                    alertDIalog();
+                    if (radioButtonJK == null) {
+                        Toast.makeText(getApplicationContext(), "Harap Isi Jenis Kelamin", Toast.LENGTH_LONG).show();
+                    }
+                    else if (radioButtonAgama == null) {
+                        Toast.makeText(getApplicationContext(), "Harap Isi Agama", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        alertDIalog();
+                    }
                 }
                 else {
 
