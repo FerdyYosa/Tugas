@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     View dialogView;
     RadioGroup radioGroupJK, radioGroupAgama;
     RadioButton radioButtonJK, radioButtonAgama;
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile(".{8,}");
     TextInputEditText namaDepan, tglLahir, namaBelakang, tempatLahir, alamat, telephone, email, password, repassword;
 
     AwesomeValidation awesomeValidation;
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         repassword = (TextInputEditText) findViewById(R.id.rePassword);
         bttnDaftar = findViewById(R.id.bttnDaftar);
         bttnKembali = findViewById(R.id.bttnKembali);
+        String emailInput = email.getText().toString().trim();
+        String passwordInput = password.getText().toString().trim();
 
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
@@ -81,18 +87,18 @@ public class MainActivity extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.email,
                 RegexTemplate.NOT_EMPTY, R.string.empty_email);
 
+        if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            awesomeValidation.addValidation(this, R.id.password,
+                    RegexTemplate.NOT_EMPTY, R.string.invalid_password);
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            awesomeValidation.addValidation(this, R.id.email,
+                    RegexTemplate.NOT_EMPTY, R.string.invalid_email);
+        }
+
         awesomeValidation.addValidation(this, R.id.password,
                 RegexTemplate.NOT_EMPTY, R.string.empty_password);
-
-        if(password.getText().equals("")) {
-            awesomeValidation.addValidation(this, R.id.password,
-                    RegexTemplate.NOT_EMPTY, R.string.empty_password);
-
-        }
-        else if (password.length() < 8 && password.length() > 0) {
-            awesomeValidation.addValidation(this, R.id.password,
-                    ".{8,}", R.string.invalid_password);
-        }
 
         bttnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +155,18 @@ public class MainActivity extends AppCompatActivity {
         };
 
     }
+
+    public static final Pattern EMAIL_ADDRESS
+            = Pattern.compile(
+                    "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                            "\\@" +
+                            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                            "(" +
+                            "\\." +
+                            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                            ")+"
+    );
+
     private void updateLabel () {
         String myFormat = "dd-MM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
