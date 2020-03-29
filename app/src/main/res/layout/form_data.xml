@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/latarBelakang"
+    tools:layout_marginTop="-300dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="885dp">
+
+        <RelativeLayout
+            android:layout_width="291dp"
+            android:layout_height="875dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/latarBelakang2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:text="@string/pendaftaranBerhasil"
+                android:textAlignment="center"
+                android:textSize="25dp"
+                android:textStyle="bold|italic"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/namaDepan2"
+                android:layout_marginTop="80dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/namaDepan2"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="105dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="170dp"
+                android:text="@string/namaBelakang2"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="195dp"
+                android:id="@+id/namaBelakang2"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/TTL"
+                android:layout_marginTop="260dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempatLahir2"
+                android:layout_marginTop="285dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/alamat2"
+                android:layout_marginTop="350dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="375dp"
+                android:id="@+id/alamat2"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="440dp"
+                android:text="@string/JK2"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="465dp"
+                android:id="@+id/JK2"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="530dp"
+                android:text="@string/agama"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/Agama"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="555dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notelp"
+                android:layout_marginTop="620dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/telephone2"
+                android:layout_marginTop="645dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email2"
+                android:layout_marginTop="710dp"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/email2"
+                android:layout_marginTop="735dp"
+                android:textSize="20dp"></TextView>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="790dp">
+                <Button
+                    android:layout_height="match_parent"
+                    android:layout_width="135dp"
+                    android:text="@string/keluarApk"
+                    android:textStyle="bold"
+                    android:id="@+id/bttnKeluar"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/btn_rounded">
+                </Button>
+                <Button
+                    android:layout_height="match_parent"
+                    android:layout_width="135dp"
+                    android:layout_marginLeft="13.3dp"
+                    android:text="@string/oke"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:id="@+id/bttnLanjut"
+                    android:background="@drawable/btn_rounded">
+                </Button>
+            </TableRow>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
